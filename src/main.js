@@ -33,7 +33,7 @@ $(document).ready(function() {
             consumerKey: 'YOUR-CONSUMER-KEY',
             consumerSecret: 'YOUR-CONSUMER-SECRET',
             callbackUrl: 'http://www.your-callback-url.com' };
-    var mentionsId;
+    var mentionsId = 0;
     var localStoreKey = "tmt5p1";
     $('#stage-data').hide();
     $('#stage-auth').hide();
