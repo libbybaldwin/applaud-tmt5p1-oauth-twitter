@@ -2,11 +2,11 @@
 
 ## jsOAuth and ChildBrowser : PhoneGap / Android non-PIN Twitter App
 
-Source code from TMT5P1 for MDS AppLaud (Eclipse Plugin for PhoneGap / Android) project.
+Source code from TMT5P1 for MDS AppLaud (Eclipse Plugin for PhoneGap / Android) tutorial.
 
-This code is html/javascript/css and therefore not specific to Android. AppLaud projects using this code run very well (albeit slowly) on an AVD (Android Virtual Device), as well as real devices, with carrier or wifi connectivity.
+The [TMT5 Part 1 Tutorial](http://www.mobiledevelopersolutions.com/home/start/twominutetutorials/tmt5p1) on [MDS AppLaud website](http://www.mobiledevelopersolutions.com/) has complete instructions, this source and useful links.
 
-The [TMT5 Part 1 Tutorial](http://www.mobiledevelopersolutions.com/home/start/twominutetutorials/tmt5p1) on [MDS AppLaud website](http://www.mobiledevelopersolutions.com/) has complete instructions, source and useful links.
+This code is html/javascript/css and therefore not specific to Android. AppLaud projects using this code run very well on an AVD (Android Virtual Device), as well as a real Android 2.x device, with carrier or wifi connectivity.
 
 This app relies heavily on:
 
@@ -15,6 +15,8 @@ This app relies heavily on:
 * Twitter Account, Tweets, and Registered [Twitter App](https://dev.twitter.com/)
 * [jQuery Mobile](http://jquerymobile.com)
 * [PhoneGap](http://phonegap.com)
+
+If using the code outside AppLaud, review scripts in index.html (this version of index.html relies on AppLaud project wizard to insert scripts, etc), but as a javascript programmer, you already do that anyway, right?
 
 ## The MIT License
 
