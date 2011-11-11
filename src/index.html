@@ -4,12 +4,19 @@
     <meta name="viewport" content="width=screen.width; user-scalable=no" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>My New Twitter App</title>
-
-	  
+      <!-- Use with AppLaud Project Creation Wizard, or add scripts to PhoneGap
+           jQuery Mobile and jsOAuth javascript and css-->
+      <!-- The following must be AFTER jquery core and BEFORE jquery mobile js -->
+      <script>
+		$(document).bind("mobileinit", function(){
+	  		$.mobile.touchOverflowEnabled = true;
+		});
+      </script>
 	  <script type="text/javascript" charset="utf-8" src="main.js"></script>
 	  <style type="text/css">
  		  .ui-header .ui-title { margin-right:20px; margin-left:20px; }
 	  </style>    
+	
 	</head>
   <body onload="init()">
 	<div data-role="page" data-theme="c" id="page-home">
@@ -28,6 +35,10 @@
 	<div id="stage-auth">
 		<h4>1. Twitter OAuthorization</h4>
 		<div data-role=button id='startbutton'>Start Twitter OAuth</div>
+		<p>Start Twitter OAuth verification and follow instructions on
+		Twitter login page. Login data is stored in local storage.</p>
+		<p>Upon successful log in you will be returned
+		to this app and have access to Twitter REST API.</p>
 		<div data-role=button id='networkbutton'>Check Network Connection</div>	
 	</div>
 	
@@ -45,8 +56,6 @@
 		<div id="twitterdata"></div>
 		<hr>
 		<div data-role=button data-inline="true" id='cancel'>Cancel Twitter Session</div>	
-		<a href="#page-dialog-confirm" data-role="button" data-rel="dialog" data-transition="pop" id="dialog-confirm">Confirm dialog</a>				
-		<a href="#page-dialog-tweet" data-role="button" data-rel="dialog" data-transition="pop" id="dialog-tweet">Confirm tweet</a>				
 	</div>
 	
 	</div>	
@@ -58,8 +67,8 @@
 	</div>
 		<div data-role="content" data-theme="c">
 			<div id="dialog-confirm-text"></div>
-			<a href="page-home.html" data-role="button" data-rel="back" id="confirm-user" data-theme="b">Continue</a>       
-			<a href="page-home.html" data-role="button" data-rel="back" id="cancel-user" data-theme="c">Cancel</a>    
+			<a data-role="button" id="confirm-user" data-theme="b">Continue</a>       
+			<a data-role="button" id="cancel-user" data-theme="c">Cancel</a>    
 		</div>	
 	</div> <!-- /page-dialog-confirm -->
 	
@@ -69,8 +78,8 @@
 	</div>
 		<div data-role="content" data-theme="c">
 			<div id="dialog-tweet-text"></div>
-			<a href="page-home.html" data-role="button" data-rel="back" id="confirm-tweet" data-theme="b">Tweet</a>       
-			<a href="page-home.html" data-role="button" data-rel="back" id="cancel-tweet" data-theme="c">Cancel</a>    
+			<a data-role="button" id="confirm-tweet" data-theme="b">Tweet</a>       
+			<a data-role="button" id="cancel-tweet" data-theme="c">Cancel</a>    
 		</div>
 	</div> <!-- /page-dialog-tweet -->
   </body>

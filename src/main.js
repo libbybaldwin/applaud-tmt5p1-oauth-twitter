@@ -26,7 +26,7 @@ function init() {
     document.addEventListener("deviceready", onDeviceReady, false);
 }
 
-$(document).ready(function() {
+$('#page-home').live('pageinit', function() {
     var oauth;
     var requestParams;
     var options = { 
@@ -37,8 +37,6 @@ $(document).ready(function() {
     var localStoreKey = "tmt5p1";
     $('#stage-data').hide();
     $('#stage-auth').hide();
-    $('#dialog-confirm').hide();
-    $('#dialog-tweet').hide();
 
     // Check for access token key/secret in localStorage
     var storedAccessData, rawData = localStorage.getItem(localStoreKey);
@@ -54,20 +52,24 @@ $(document).ready(function() {
                     var entry = JSON.parse(data.text);
                     console.log("AppLaudLog: Success getting credentials. screen_name: " + entry.screen_name);
                         
-                    $('#confirm-user').click(function() {
+                    $('#confirm-user').live('click', function() {
                         $('#oauthStatus').html('<span style="color:green;">Success!</span>');
                         $('#userInfo').html('Current user: <strong>' + entry.screen_name + '</strong>');
                         $('#stage-data').show();
-                     });
-                     $('#cancel-user').click(function() {
-                         $('#cancel').trigger('click');
-                     });
+                        $.mobile.changePage($('#page-home'), { reverse : true, changeHash: false });
+                        return false;
+                    });
+                    $('#cancel-user').live('click', function() {
+                        $('#cancel').trigger('click');
+                        $.mobile.changePage($('#page-home'), { reverse : true, changeHash: false });
+                        return false;
+                    });
 
-                     $('#dialog-confirm-text').html('<p>Twitter user: <strong>'
+                    $('#dialog-confirm-text').html('<p>Twitter user: <strong>'
                          + entry.screen_name + '</strong><br> already authorized.<br>Continue as <strong>' 
-                         + entry.screen_name + '</strong>?</p><p>Cancel to restart authorization.</p><hr>');
-                     $('#stage-reading-local-store').hide();
-                     $('#dialog-confirm').trigger('click');
+                         + entry.screen_name + '</strong>?</p><p>Cancel to log in a different user.</p><hr>');
+                    $('#stage-reading-local-store').hide();
+                    $.mobile.changePage($('#page-dialog-confirm'), { role: 'dialog', changeHash: false });
                 },
                 function(data) { 
                     alert('Error with stored user data. Re-start authorization.');
@@ -109,7 +111,7 @@ $(document).ready(function() {
 
                 // Same as above, but user went to app's homepage instead
                 // of back to app. Don't close the browser in this case.
-                if (loc === "http://www.your-app-homepage-url.com/") {
+                if (loc === "http://www.your-apps-homepage.com/") {
                     $('#oauthStatus').html('<span style="color:red;">User declined access</span>');
                     return;
                 }
@@ -214,7 +216,7 @@ $(document).ready(function() {
                 function(data) {
                     var entries = JSON.parse(data.text);
                     var count = entries.length;
-                    var data_html = '<h4>Home Timeline: ' + count + ' entries</h4>';
+                    var data_html = '<h4>Home Timeline: 1 of ' + count + ' entries</h4>';
 
                     if (count >= 0) {
                         // Use count value to display all timelines
@@ -244,7 +246,7 @@ $(document).ready(function() {
                 function(data) {
                     var entries = JSON.parse(data.text);
                     var count = entries.length;
-                    var data_html = '<h4>Mentions: ' + count + ' entries</h4>';
+                    var data_html = '<h4>Mentions: 1 of ' + count + ' entries</h4>';
                     
                     if (count > 0) {
                         // Use count value to display all mentions
@@ -289,21 +291,24 @@ $(document).ready(function() {
                                 + entry.text + '</p>');
                         $('#twitterdata').prepend(data_html);
                         $('#tweettextarea').empty();
+                        $.mobile.changePage($('#page-home'), { reverse : true, changeHash: false });
                     },
                     function(data) { 
                         alert('Error Tweeting.'); 
                         console.log("AppLaudLog: Error during tweet " + data.text);
                         $('#oauthStatus').html('<span style="color:red;">Error Tweeting</span>');                           
+                        $.mobile.changePage($('#page-home'), { reverse : true, changeHash: false });
                     }
             );                  
         });
         $('#cancel-tweet').click(function() {
              console.log("AppLaudLog: tweet cancelled by user");
+             $.mobile.changePage($('#page-home'), { reverse : true, changeHash: false });
         });
 
         $('#dialog-tweet-text').html('<p>Really tweet ' + $('#tweettextarea').val().length 
                  + ' characters?<br>Your status:<br>"' + theTweet + '"');
-        $('#dialog-tweet').trigger('click');        
+        $.mobile.changePage($('#page-dialog-tweet'), { role: 'dialog', changeHash: false });
     });
    
     $('#networkbutton').click(function() {
